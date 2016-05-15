@@ -1,0 +1,28 @@
+<html>
+
+<body>
+<script>
+handlers = {};
+
+function on(event, handler) {
+ window.handlers[event] = handler;
+}
+
+function fire(event, value) {
+  window.handlers[event] && window.handlers[event](value);
+}
+
+function onMailTypeChanged(handler) {
+  on('mailTypeChanged', handler)
+}
+
+</script>
+
+<iframe width='600px' src="include.html?mailTypeChangedSubscriberExpression=window.parent.onMailTypeChanged"></iframe>
+</body>
+<div>
+<label for='type'>Mail Type:
+<input id='type' type='text'/></label>
+<button onclick='fire("mailTypeChanged", document.getElementById("type").value)'>Fire</button>
+</div>
+</html>

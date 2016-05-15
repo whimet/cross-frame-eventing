@@ -1,0 +1,23 @@
+<html>
+
+<body>
+<script>
+function getParameter(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+eval(getParameter('mailTypeChangedSubscriberExpression'))(function(data) {
+  console.log('mailTypeChanged event' + data);
+  document.getElementById('log').innerHTML += 'got ' + data + ' ' + new Date() + '<br/>';
+});
+</script>
+This is from iframe which subscribed 'mailTypeChanged' event.
+<div id='log'></div>
+</body>
+</html>
